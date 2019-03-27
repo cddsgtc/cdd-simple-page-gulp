@@ -1,0 +1,35 @@
+{
+  "name": "cdd-simple-page-gulp",
+  "version": "0.0.4",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp --series default build",
+    "sass": "node-sass -w -r scss -o style --output-style compressed",
+    "server": "browser-sync start --files \"manifest/**/*\" --index \"index.html\" --server"
+  },
+  "keywords": [],
+  "author": "cdd <cddsgtc@163.com>",
+  "license": "ISC",
+  "description": "简单的页面的gulp项目",
+  "devDependencies": {
+    "@babel/core": "^7.3.3",
+    "@babel/preset-env": "^7.3.1",
+    "delete": "^1.1.0",
+    "gulp": "^4.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "^4.0.0",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-replace-path": "^0.4.0",
+    "gulp-rev": "^9.0.0",
+    "gulp-rev-rewrite": "^1.1.4",
+    "gulp-uglify": "^3.0.1"
+  },
+  "dependencies": {
+    "mj-page-base": "0.0.16"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cddsgtc/cdd-simple-page-gulp"
+  }
+}
