@@ -1,7 +1,7 @@
 {
   "name": "cdd-simple-page-gulp",
   "version": "0.0.8",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "gulp --series default build",
