@@ -1,4 +1,4 @@
-const { src, dest, parallel, series } = require('gulp')
+const { src, dest, parallel, series, watch } = require('gulp')
 const rev = require('gulp-rev')
 const revRewrite = require('gulp-rev-rewrite')
 const del = require('delete')
@@ -11,17 +11,17 @@ const babel = require('gulp-babel')
 // 位置
 let distPath = 'assets'
 
-function toDel(cb) {
+function toDel (cb) {
   del(['dist'], cb)
 }
 // css部分
-function css(cb) {
+function css (cb) {
   return src('style/*.css')
     .pipe(cleanCss())
     .pipe(dest('dist/' + distPath + '/style'))
 }
 // js
-function js(cb) {
+function js (cb) {
   return src('js/*.js')
     .pipe(
       babel({
@@ -33,7 +33,7 @@ function js(cb) {
 }
 
 // html
-function html(cb) {
+function html (cb) {
   return (
     src('index.html')
       .pipe(replace(/\b((src|href)=(\"|'))(?!http)/g, `$1${distPath}/`))
@@ -44,7 +44,7 @@ function html(cb) {
 
 // build 部分👇
 // 去添加指纹
-function toManifest(cb) {
+function toManifest (cb) {
   del(['manifest', 'build'])
   return src(`dist/${distPath}/**/*`)
     .pipe(rev())
@@ -54,13 +54,22 @@ function toManifest(cb) {
 }
 
 // rewrite rev
-function replaceName(cb) {
+function replaceName (cb) {
   let manifest = src('manifest/rev-manifest.json')
   return src(`dist/index.html`)
     .pipe(revRewrite({ manifest }))
     .pipe(dest('build'))
 }
 
+// 监视文件变化
+function adminIt () {
+  watch('style/**/*.css', css)
+  watch('js/**/*.js', js)
+  watch('index.html', html)
+}
+
+
+exports.admin = adminIt
 exports.assets = parallel(css, js, html)
 exports.default = series(toDel, parallel(css, js, html))
 exports.build = series(toDel, parallel(css, js, html), toManifest, replaceName)

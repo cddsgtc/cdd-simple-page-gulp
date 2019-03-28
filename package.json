@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "gulp --series default build",
     "sass": "node-sass -w -r scss -o style --output-style compressed",
-    "server": "browser-sync start --files \"manifest/**/*\" --index \"index.html\" --server"
+    "server": "browser-sync start --files \"dist/**/*\" --index \"dist/index.html\" --server"
   },
   "keywords": [],
   "author": "cdd <cddsgtc@163.com>",
